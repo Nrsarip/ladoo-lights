@@ -1,151 +1,319 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ladoo Lights | Frequently Asked Questions</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../assets/css/styles.css" />
-  </head>
-  <body>
-    <header>
-      <div class="navbar">
-        <div class="logo">Ladoo Lights</div>
-        <nav>
-          <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="../gallery.html">Gallery</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ladoo &amp; Light - FAQ</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec1313",
+                        "primary-dark": "#c40f0f",
+                        "accent-gold": "#D4AF37",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221010",
+                        "card-light": "#ffffff",
+                        "card-dark": "#2a1515",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary ~ * {
+            animation: sweep .3s ease-in-out;
+        }
+        @keyframes sweep {
+            0%    {opacity: 0; transform: translateY(-10px)}
+            100%  {opacity: 1; transform: translateY(0)}
+        }::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e5e5e5;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4d4d4;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#1b0d0d] dark:text-[#fcf8f8] overflow-x-hidden transition-colors duration-300">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f3e7e7] dark:border-b-[#3d2222] bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm px-6 py-4 lg:px-20">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">local_florist</span>
+</div>
+<h2 class="text-[#1b0d0d] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">Ladoo &amp; Light</h2>
+</div>
+<div class="hidden lg:flex flex-1 justify-end gap-8 items-center">
+<nav class="flex items-center gap-9">
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Gallery</a>
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Services</a>
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">About Us</a>
+<a class="text-primary text-sm font-bold leading-normal" href="#">FAQ</a>
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Contact</a>
+</nav>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary hover:bg-primary-dark transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Inquire Now</span>
+</button>
+</div>
+<div class="lg:hidden flex items-center">
+<span class="material-symbols-outlined text-[#1b0d0d] dark:text-white cursor-pointer">menu</span>
+</div>
+</header>
+<main class="flex flex-col min-h-screen">
+<section class="relative flex flex-col items-center justify-center w-full min-h-[350px] lg:min-h-[400px] px-4 py-12 lg:px-20">
+<div class="absolute inset-0 w-full h-full z-0">
+<div class="w-full h-full bg-cover bg-center bg-no-repeat" style='background-image: linear-gradient(rgba(34, 16, 16, 0.7) 0%, rgba(34, 16, 16, 0.8) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAnbqRoxD6rQ6UpZ6pAxq8_Q15gF0PrCYrBFmFCMueNZKYXZC0Nu5l0OUQca94Xp4ROHdxgVWdBMneEoAIAvmUDAbm3BxRzgJXauyoZVhZUHaY70xTxVLacUk99G32mCPJZ31KekwPAP92LprFuIm7Nk8foYxXAAj-fsDaVC4KxxEDbXaZxhxAVUfyHd8kdji2LlculjJ3vYVu0DjwRab-dwnMdcXahPdAm2gSWdS1G9dTDf9_DfE2tiB6C4aUv1Wtl4n228TUKzA5I");'>
+</div>
+</div>
+<div class="relative z-10 flex flex-col gap-4 text-center max-w-4xl mx-auto">
+<div class="inline-flex items-center justify-center gap-2 mb-2">
+<span class="h-px w-8 bg-accent-gold"></span>
+<span class="text-accent-gold text-sm font-bold uppercase tracking-widest">Help Center</span>
+<span class="h-px w-8 bg-accent-gold"></span>
+</div>
+<h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] md:text-5xl lg:text-6xl">
+                Frequently Asked Questions
+            </h1>
+<p class="text-gray-200 text-base font-medium leading-relaxed max-w-2xl mx-auto md:text-lg">
+                Have questions about our event decor services? Find answers to common inquiries about bookings, customization, and what to expect when working with us.
+            </p>
+</div>
+</section>
+<section class="flex-1 px-4 py-16 lg:px-20 bg-background-light dark:bg-background-dark">
+<div class="mx-auto max-w-[1000px] flex flex-col lg:flex-row gap-12">
+<div class="lg:w-1/4 hidden lg:block">
+<div class="sticky top-28 flex flex-col gap-2">
+<h3 class="text-lg font-bold text-[#1b0d0d] dark:text-white mb-4 px-4 border-l-4 border-primary">Categories</h3>
+<a class="text-primary font-bold bg-white dark:bg-card-dark px-4 py-3 rounded-lg shadow-sm border border-primary/20" href="#booking">Booking &amp; Process</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-card-dark px-4 py-3 rounded-lg transition-all" href="#services">Services &amp; Decor</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-card-dark px-4 py-3 rounded-lg transition-all" href="#logistics">Logistics &amp; Setup</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-card-dark px-4 py-3 rounded-lg transition-all" href="#payment">Pricing &amp; Payment</a>
+</div>
+</div>
+<div class="lg:w-3/4 flex flex-col gap-12">
+<div class="scroll-mt-28" id="booking">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-accent-gold text-2xl">calendar_month</span>
+<h2 class="text-2xl font-bold text-[#1b0d0d] dark:text-white">Booking &amp; Process</h2>
+</div>
+<div class="flex flex-col gap-4">
+<details class="group bg-card-light dark:bg-card-dark border border-[#f3e7e7] dark:border-[#3d2222] rounded-xl overflow-hidden transition-all duration-300 open:shadow-md hover:shadow-sm">
+<summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+<h3 class="text-base md:text-lg font-bold text-[#1b0d0d] dark:text-white group-hover:text-primary transition-colors">How far in advance should we book your services?</h3>
+<span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300 text-gray-400 group-hover:text-primary">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-0 text-gray-600 dark:text-gray-300 leading-relaxed">
+<p>We recommend booking as early as possible, especially for peak wedding seasons (October to March). Ideally, 6-12 months in advance ensures we can dedicate our full attention to your date. However, we do accommodate last-minute requests if our calendar permits.</p>
+</div>
+</details>
+<details class="group bg-card-light dark:bg-card-dark border border-[#f3e7e7] dark:border-[#3d2222] rounded-xl overflow-hidden transition-all duration-300 open:shadow-md hover:shadow-sm">
+<summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+<h3 class="text-base md:text-lg font-bold text-[#1b0d0d] dark:text-white group-hover:text-primary transition-colors">Do you offer initial consultations?</h3>
+<span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300 text-gray-400 group-hover:text-primary">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-0 text-gray-600 dark:text-gray-300 leading-relaxed">
+<p>Yes! We offer a complimentary initial consultation, either virtually or in-person at our studio. This allows us to understand your vision, discuss themes, and see if we are the right fit for your special day.</p>
+</div>
+</details>
+<details class="group bg-card-light dark:bg-card-dark border border-[#f3e7e7] dark:border-[#3d2222] rounded-xl overflow-hidden transition-all duration-300 open:shadow-md hover:shadow-sm">
+<summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+<h3 class="text-base md:text-lg font-bold text-[#1b0d0d] dark:text-white group-hover:text-primary transition-colors">Can you work with a specific theme I have in mind?</h3>
+<span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300 text-gray-400 group-hover:text-primary">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-0 text-gray-600 dark:text-gray-300 leading-relaxed">
+<p>Absolutely. Customization is at the heart of Ladoo &amp; Light. Whether you envision a traditional royal aesthetic, a bohemian floral setup, or a modern minimalist vibe, we tailor every detail to match your unique theme and color palette.</p>
+</div>
+</details>
+</div>
+</div>
+<div class="scroll-mt-28" id="services">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-accent-gold text-2xl">local_florist</span>
+<h2 class="text-2xl font-bold text-[#1b0d0d] dark:text-white">Services &amp; Decor</h2>
+</div>
+<div class="flex flex-col gap-4">
+<details class="group bg-card-light dark:bg-card-dark border border-[#f3e7e7] dark:border-[#3d2222] rounded-xl overflow-hidden transition-all duration-300 open:shadow-md hover:shadow-sm">
+<summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+<h3 class="text-base md:text-lg font-bold text-[#1b0d0d] dark:text-white group-hover:text-primary transition-colors">Do you provide fresh flowers only?</h3>
+<span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300 text-gray-400 group-hover:text-primary">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-0 text-gray-600 dark:text-gray-300 leading-relaxed">
+<p>We specialize in fresh floral arrangements to provide the most fragrant and luxurious experience. However, we also offer high-quality silk florals for specific installations where durability or weather conditions might be a concern, such as outdoor ceiling drapes in summer.</p>
+</div>
+</details>
+<details class="group bg-card-light dark:bg-card-dark border border-[#f3e7e7] dark:border-[#3d2222] rounded-xl overflow-hidden transition-all duration-300 open:shadow-md hover:shadow-sm">
+<summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+<h3 class="text-base md:text-lg font-bold text-[#1b0d0d] dark:text-white group-hover:text-primary transition-colors">What other decor items do you supply besides flowers?</h3>
+<span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300 text-gray-400 group-hover:text-primary">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-0 text-gray-600 dark:text-gray-300 leading-relaxed">
+<p>Beyond florals, we provide comprehensive decor solutions including lighting (chandeliers, fairy lights), drapery, furniture rentals (sofas for stage, chiavari chairs), props, table centerpieces, and custom signage.</p>
+</div>
+</details>
+</div>
+</div>
+<div class="scroll-mt-28" id="logistics">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-accent-gold text-2xl">local_shipping</span>
+<h2 class="text-2xl font-bold text-[#1b0d0d] dark:text-white">Logistics &amp; Setup</h2>
+</div>
+<div class="flex flex-col gap-4">
+<details class="group bg-card-light dark:bg-card-dark border border-[#f3e7e7] dark:border-[#3d2222] rounded-xl overflow-hidden transition-all duration-300 open:shadow-md hover:shadow-sm">
+<summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+<h3 class="text-base md:text-lg font-bold text-[#1b0d0d] dark:text-white group-hover:text-primary transition-colors">Do you handle setup and teardown?</h3>
+<span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300 text-gray-400 group-hover:text-primary">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-0 text-gray-600 dark:text-gray-300 leading-relaxed">
+<p>Yes, our full-service package includes delivery, professional setup, and post-event teardown. We coordinate directly with your venue to ensure seamless logistics so you can enjoy your event stress-free.</p>
+</div>
+</details>
+<details class="group bg-card-light dark:bg-card-dark border border-[#f3e7e7] dark:border-[#3d2222] rounded-xl overflow-hidden transition-all duration-300 open:shadow-md hover:shadow-sm">
+<summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+<h3 class="text-base md:text-lg font-bold text-[#1b0d0d] dark:text-white group-hover:text-primary transition-colors">Do you travel for destination weddings?</h3>
+<span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300 text-gray-400 group-hover:text-primary">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-0 text-gray-600 dark:text-gray-300 leading-relaxed">
+<p>Yes! We love destination weddings. We are based in Mumbai but frequently travel to Jaipur, Udaipur, Goa, and Kerala. Travel and accommodation fees for our team will apply for events outside our base city.</p>
+</div>
+</details>
+</div>
+</div>
+<div class="scroll-mt-28" id="payment">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-accent-gold text-2xl">payments</span>
+<h2 class="text-2xl font-bold text-[#1b0d0d] dark:text-white">Pricing &amp; Payment</h2>
+</div>
+<div class="flex flex-col gap-4">
+<details class="group bg-card-light dark:bg-card-dark border border-[#f3e7e7] dark:border-[#3d2222] rounded-xl overflow-hidden transition-all duration-300 open:shadow-md hover:shadow-sm">
+<summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+<h3 class="text-base md:text-lg font-bold text-[#1b0d0d] dark:text-white group-hover:text-primary transition-colors">What is your minimum budget?</h3>
+<span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300 text-gray-400 group-hover:text-primary">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-0 text-gray-600 dark:text-gray-300 leading-relaxed">
+<p>Our bespoke floral and decor services typically start from INR 2,00,000 for intimate events. For full-scale wedding production involving multiple functions (Sangeet, Wedding, Reception), budgets vary based on complexity and guest count. Please contact us for a personalized quote.</p>
+</div>
+</details>
+<details class="group bg-card-light dark:bg-card-dark border border-[#f3e7e7] dark:border-[#3d2222] rounded-xl overflow-hidden transition-all duration-300 open:shadow-md hover:shadow-sm">
+<summary class="flex items-center justify-between p-6 cursor-pointer select-none">
+<h3 class="text-base md:text-lg font-bold text-[#1b0d0d] dark:text-white group-hover:text-primary transition-colors">What are your payment terms?</h3>
+<span class="material-symbols-outlined transform group-open:rotate-180 transition-transform duration-300 text-gray-400 group-hover:text-primary">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-0 text-gray-600 dark:text-gray-300 leading-relaxed">
+<p>We require a 40% non-refundable retainer to secure your date. A second payment of 40% is due 30 days before the event, and the final 20% balance is due 1 week prior to the event date.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-[#fcf8f8] dark:bg-[#1a0a0a] py-20 px-4 lg:px-20 border-t border-[#f3e7e7] dark:border-[#3d2222]">
+<div class="max-w-[800px] mx-auto text-center flex flex-col items-center gap-6">
+<div class="size-16 rounded-full bg-accent-gold/10 flex items-center justify-center text-accent-gold mb-2">
+<span class="material-symbols-outlined text-3xl">question_answer</span>
+</div>
+<h2 class="text-[#1b0d0d] dark:text-white text-3xl font-bold leading-tight">Still have questions?</h2>
+<p class="text-gray-600 dark:text-gray-300 text-lg">
+                If you couldn't find the answer you were looking for, please don't hesitate to reach out to our team. We're here to help make your event perfect.
+            </p>
+<div class="flex flex-col sm:flex-row gap-4 mt-4">
+<button class="flex min-w-[160px] cursor-pointer items-center justify-center rounded-lg h-12 px-6 bg-primary hover:bg-primary-dark transition-colors text-white text-base font-bold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transform duration-200">
+                    Contact Us
+                </button>
+<button class="flex min-w-[160px] cursor-pointer items-center justify-center rounded-lg h-12 px-6 border border-[#e5e5e5] dark:border-[#3d2222] bg-white dark:bg-card-dark hover:bg-gray-50 dark:hover:bg-[#2a1515] transition-colors text-[#1b0d0d] dark:text-white text-base font-bold shadow-sm">
+                    Book a Call
+                </button>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-background-light dark:bg-background-dark border-t border-[#f3e7e7] dark:border-[#3d2222] pt-16 pb-8 px-6 lg:px-20">
+<div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+<div class="md:col-span-1 flex flex-col gap-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-2xl">local_florist</span>
+<span class="text-[#1b0d0d] dark:text-white text-lg font-bold">Ladoo &amp; Light</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                Award-winning Indian event styling and floral design. creating magical settings for your most cherished moments.
+            </p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-[#1b0d0d] dark:text-white font-bold text-sm uppercase tracking-wide">Explore</h4>
+<div class="flex flex-col gap-2">
+<a class="text-gray-600 dark:text-gray-400 hover:text-primary text-sm transition-colors" href="#">Weddings</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-primary text-sm transition-colors" href="#">Corporate Events</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-primary text-sm transition-colors" href="#">Private Parties</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-primary text-sm transition-colors" href="#">Floral Subscriptions</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-[#1b0d0d] dark:text-white font-bold text-sm uppercase tracking-wide">Company</h4>
+<div class="flex flex-col gap-2">
+<a class="text-gray-600 dark:text-gray-400 hover:text-primary text-sm transition-colors" href="#">About Us</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-primary text-sm transition-colors" href="#">Press</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-primary text-sm transition-colors" href="#">Careers</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-primary text-sm transition-colors" href="#">Contact</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-[#1b0d0d] dark:text-white font-bold text-sm uppercase tracking-wide">Get in Touch</h4>
+<p class="text-gray-600 dark:text-gray-400 text-sm">hello@ladooandlight.com</p>
+<p class="text-gray-600 dark:text-gray-400 text-sm">+91 98765 43210</p>
+<div class="flex gap-4 mt-2">
+<a class="size-8 rounded-full bg-[#f3e7e7] dark:bg-[#2a1515] flex items-center justify-center text-[#1b0d0d] dark:text-white hover:bg-primary hover:text-white transition-all" href="#">
+<svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path></svg>
+</a>
+<a class="size-8 rounded-full bg-[#f3e7e7] dark:bg-[#2a1515] flex items-center justify-center text-[#1b0d0d] dark:text-white hover:bg-primary hover:text-white transition-all" href="#">
+<svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path clip-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 014.005 4.054c.636-.247 1.363-.416 2.427-.465 1.067-.047 1.407-.06 4.123-.06h.08v.001zm0-2c-2.71 0-3.056.01-4.122.06 0 0-.001 0-.001 0-1.11.05-2.115.266-2.977.94a6.903 6.903 0 00-2.518 2.518c-.675.862-.89 1.867-.94 2.977-.05 1.066-.06 1.412-.06 4.122 0 2.71.01 3.056.06 4.122.05 1.11.266 2.115.94 2.977a6.903 6.903 0 002.518 2.518c.862.675 1.867.89 2.977.94 1.066.05 1.412.06 4.122.06 2.71 0 3.056-.01 4.122-.06 1.11-.05 2.115-.266 2.977-.94a6.903 6.903 0 002.518-2.518c.675-.862.89-1.867.94-2.977.05-1.066.06-1.412.06-4.122 0-2.71-.01-3.056-.06-4.122-.05-1.11-.266-2.115-.94-2.977a6.903 6.903 0 00-2.518-2.518c-.862-.675-1.867-.89-2.977-.94-1.066-.05-1.412-.06-4.122-.06-2.71 0-3.056.01-4.122.06z" fill-rule="evenodd"></path><path clip-rule="evenodd" d="M12.315 5.82c-3.417 0-6.188 2.771-6.188 6.188 0 3.417 2.771 6.188 6.188 6.188 3.417 0 6.188-2.771 6.188-6.188 0-3.417-2.771-6.188-6.188-6.188zm0 10.376c-2.313 0-4.188-1.875-4.188-4.188 0-2.313 1.875-4.188 4.188-4.188 2.313 0 4.188 1.875 4.188 4.188 0 2.313-1.875 4.188-4.188 4.188z" fill-rule="evenodd"></path><path d="M18.73 6.97a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+<div class="max-w-[1200px] mx-auto border-t border-[#e5e5e5] dark:border-[#2a1515] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-gray-400 text-sm">© 2024 Ladoo &amp; Light. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-sm" href="#">Privacy Policy</a>
+<a class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-sm" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
 
-    <main>
-      <section class="hero" id="faq">
-        <div class="hero-content">
-          <span class="badge">Planning support</span>
-          <h1>Questions about designing your celebration</h1>
-          <p>
-            From budget-friendly haldi backdrops to multi-day baraat, sangeet, and
-            reception builds, here are the answers to the questions we hear most often.
-            We keep every celebration rooted in tradition while delivering an elevated,
-            contemporary experience.
-          </p>
-          <div class="cta-buttons">
-            <a class="button button-primary" href="../index.html#contact">Plan with us</a>
-            <a class="button button-secondary" href="../gallery.html">View our portfolio</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-header">
-          <div>
-            <p class="eyebrow">Essential details</p>
-            <h2>Your most common questions, answered</h2>
-            <p>
-              If you do not see your question here, we are happy to schedule a call to
-              discuss the specifics of your venue, rituals, and vision.
-            </p>
-          </div>
-        </div>
-        <div class="services">
-          <article class="service-card">
-            <h3>How early should we book?</h3>
-            <p>
-              Peak season weekends book 6–9 months in advance. If you are planning a
-              multi-event celebration (haldi, mehndi, phera, reception), we recommend
-              connecting as soon as dates are set so we can design cohesive looks for each
-              ceremony.
-            </p>
-          </article>
-          <article class="service-card">
-            <h3>Do you travel for destination weddings?</h3>
-            <p>
-              Yes. Our team produces destination weddings across India and overseas. We
-              coordinate with local vendors for florals, staging, and lighting while
-              bringing signature décor, textiles, and art pieces from our studio.
-            </p>
-          </article>
-          <article class="service-card">
-            <h3>Can you work within our budget?</h3>
-            <p>
-              We prioritize high-impact focal points—mandap, entrances, and photo areas—to
-              maximize your budget. After our design consultation, we provide a transparent
-              estimate with optional upgrades so you can choose where to splurge or save.
-            </p>
-          </article>
-          <article class="service-card">
-            <h3>What does the design process look like?</h3>
-            <p>
-              We begin with moodboards that reflect your rituals and color preferences,
-              then build a cohesive plan for florals, draping, lighting, and signage. You
-              will receive a timeline, material samples, and a production checklist before
-              we start fabrication.
-            </p>
-          </article>
-          <article class="service-card">
-            <h3>Do you handle rentals and vendors?</h3>
-            <p>
-              Absolutely. We manage stage rentals, seating, linens, and power needs,
-              collaborating with trusted partners or your preferred vendors. Our team also
-              oversees installation and teardown so your family can focus on the rituals.
-            </p>
-          </article>
-          <article class="service-card">
-            <h3>Can you incorporate family heirlooms?</h3>
-            <p>
-              We love to. Whether it is a treasured sari for the backdrop, brass urli
-              centerpieces, or ancestral photographs, we design vignettes that honor your
-              heritage while maintaining the refined aesthetic of the celebration.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="contact">
-        <div class="section-header">
-          <div>
-            <p class="eyebrow">Next steps</p>
-            <h2>Share your dates, venue, and inspiration</h2>
-            <p>
-              Tell us about your celebration, and we will respond with a tailored décor
-              outline and timeline within one business day.
-            </p>
-          </div>
-            <a class="button button-primary" href="mailto:hello@ladoolights.com">Email our team</a>
-        </div>
-        <div class="contact-grid">
-          <div class="contact-card">
-            <h3>Call or WhatsApp</h3>
-            <p><a href="tel:+911234567890">+91 123 456 7890</a></p>
-            <p>We are available 10:00–19:00 IST, Monday to Saturday.</p>
-          </div>
-          <div class="contact-card">
-            <h3>Studio visits</h3>
-            <p>By appointment at our Delhi and Mumbai studios.</p>
-            <p>Share your availability and we will arrange a walkthrough.</p>
-          </div>
-          <div class="contact-card">
-            <h3>Custom proposals</h3>
-            <p>
-              After our consultation, you will receive a customized décor plan covering
-              florals, lighting, staging, and guest experience touches.
-            </p>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <p>© 2024 Ladoo Lights. Crafted with tradition and light.</p>
-    </footer>
-  </body>
-</html>
+</body></html>
