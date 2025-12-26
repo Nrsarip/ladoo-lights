@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1067" role="img" aria-labelledby="title desc">
+  <title id="title">Traditional Indian stage with ornate chair and floral backdrop</title>
+  <desc id="desc">Illustrated interpretation of the provided wedding stage featuring a maroon and blush drape wall, floral baskets, and a ceremonial chair.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#b41c3c" />
+      <stop offset="60%" stop-color="#d4425f" />
+      <stop offset="100%" stop-color="#f3aac3" />
+    </linearGradient>
+    <linearGradient id="chair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#910a25" />
+      <stop offset="100%" stop-color="#c42645" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1067" fill="url(#bg)" />
+  <path d="M0 0H620L420 1067H0z" fill="#c02444" opacity="0.9" />
+  <path d="M1600 0h-640l220 1067H1600z" fill="#f8c4d6" opacity="0.95" />
+  <rect x="220" y="820" width="1160" height="160" fill="#18804a" />
+  <rect x="220" y="980" width="1160" height="60" fill="#0f5c32" />
+  <g fill="#f4d15c" opacity="0.85">
+    <path d="M150 320h16v-220h-16z" />
+    <path d="M300 320h16v-220h-16z" />
+    <path d="M450 320h16v-220h-16z" />
+    <path d="M600 320h16v-220h-16z" />
+    <path d="M750 320h16v-220h-16z" />
+    <path d="M900 320h16v-220h-16z" />
+    <path d="M1050 320h16v-220h-16z" />
+    <path d="M1200 320h16v-220h-16z" />
+  </g>
+  <g fill="#f4d15c">
+    <circle cx="158" cy="80" r="62" />
+    <circle cx="308" cy="80" r="62" />
+    <circle cx="458" cy="80" r="62" />
+    <circle cx="608" cy="80" r="62" />
+    <circle cx="758" cy="80" r="62" />
+    <circle cx="908" cy="80" r="62" />
+    <circle cx="1058" cy="80" r="62" />
+    <circle cx="1208" cy="80" r="62" />
+  </g>
+  <g>
+    <path d="M690 520h220v360H690z" fill="url(#chair)" stroke="#f2d17a" stroke-width="12" />
+    <rect x="650" y="560" width="60" height="120" fill="#e7cf9b" />
+    <rect x="890" y="560" width="60" height="120" fill="#e7cf9b" />
+    <rect x="700" y="560" width="200" height="280" fill="none" stroke="#f7d77f" stroke-width="12" stroke-dasharray="36 32" />
+    <rect x="710" y="580" width="180" height="240" fill="none" stroke="#f6c769" stroke-width="8" stroke-dasharray="20 26" />
+    <rect x="720" y="900" width="40" height="160" fill="#e7cf9b" />
+    <rect x="860" y="900" width="40" height="160" fill="#e7cf9b" />
+  </g>
+  <g fill="none" stroke="#fbe7c2" stroke-width="18">
+    <circle cx="1220" cy="260" r="88" fill="#f05a54" />
+    <circle cx="1340" cy="380" r="80" fill="#f7ba54" />
+    <circle cx="1220" cy="520" r="82" fill="#f0dc7d" />
+    <circle cx="1340" cy="640" r="78" fill="#e54c59" />
+  </g>
+  <g>
+    <ellipse cx="260" cy="860" rx="80" ry="46" fill="#f5e3b0" stroke="#f8d778" stroke-width="10" />
+    <ellipse cx="380" cy="900" rx="80" ry="46" fill="#f39858" stroke="#f8d778" stroke-width="10" />
+    <ellipse cx="1240" cy="900" rx="80" ry="46" fill="#f7d37d" stroke="#f8d778" stroke-width="10" />
+    <ellipse cx="1360" cy="860" rx="80" ry="46" fill="#f6aa59" stroke="#f8d778" stroke-width="10" />
+  </g>
+</svg>
