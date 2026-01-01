@@ -91,9 +91,19 @@
 </div>
 <!-- Mobile Menu Icon -->
 <div class="lg:hidden flex items-center">
-<span class="material-symbols-outlined text-[#1b0d0d] dark:text-white cursor-pointer">menu</span>
+<button id="mobile-menu-toggle" class="p-2 text-[#1b0d0d] dark:text-white" aria-label="Toggle navigation" aria-expanded="false">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
 </div>
 </header>
+<div id="mobile-menu" class="lg:hidden hidden flex flex-col gap-3 px-6 py-4 border-b border-[#f3e7e7] dark:border-[#3d2222] bg-background-light dark:bg-background-dark">
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-base font-medium leading-normal hover:text-primary transition-colors" href="index.html">Home</a>
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-base font-medium leading-normal hover:text-primary transition-colors" href="gallery.html">Gallery</a>
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-base font-medium leading-normal hover:text-primary transition-colors" href="services.html">Services</a>
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-base font-medium leading-normal hover:text-primary transition-colors" href="aboutus.html">About Us</a>
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-base font-medium leading-normal hover:text-primary transition-colors" href="FAQ.html">Contact</a>
+<a href="mailto:ladooandlights@gmail.com" class="mt-1 inline-flex items-center justify-center rounded-lg h-11 px-5 bg-primary hover:bg-primary-dark transition-colors text-white text-sm font-bold">Inquire Now</a>
+</div>
 <!-- Main Content Wrapper -->
 <main class="flex flex-col min-h-screen">
 <!-- Hero Section -->
@@ -3173,5 +3183,77 @@
 </div>
 </div>
 </footer>
+<script>
+    (() => {
+        const toggle = document.getElementById("mobile-menu-toggle");
+        const menu = document.getElementById("mobile-menu");
+        if (toggle && menu) {
+            const body = document.body;
+            const closeMenu = () => {
+                menu.classList.add("hidden");
+                toggle.setAttribute("aria-expanded", "false");
+                body.classList.remove("overflow-hidden");
+            };
+            toggle.addEventListener("click", () => {
+                const isOpen = !menu.classList.contains("hidden");
+                if (isOpen) {
+                    closeMenu();
+                } else {
+                    menu.classList.remove("hidden");
+                    toggle.setAttribute("aria-expanded", "true");
+                    body.classList.add("overflow-hidden");
+                }
+            });
+            menu.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+            window.addEventListener("resize", () => {
+                if (window.innerWidth >= 1024) {
+                    closeMenu();
+                }
+            });
+        }
+    })();
+</script>
+<script>
+    (() => {
+        const overlay = document.getElementById("lightbox-overlay");
+        const overlayImg = document.getElementById("lightbox-image");
+        const closeBtn = document.getElementById("lightbox-close");
+        const grid = document.getElementById("autoGalleryGrid");
+        if (!overlay || !overlayImg || !closeBtn || !grid) return;
 
+        const open = (src, alt) => {
+            if (!src) return;
+            overlayImg.src = src;
+            overlayImg.alt = alt || "Expanded gallery image";
+            overlay.classList.remove("hidden");
+            document.body.classList.add("lightbox-open");
+        };
+
+        const close = () => {
+            overlay.classList.add("hidden");
+            overlayImg.src = "";
+            document.body.classList.remove("lightbox-open");
+        };
+
+        grid.addEventListener("click", (event) => {
+            const target = event.target;
+            const img = target instanceof HTMLElement ? target.closest("img") : null;
+            if (!img || !grid.contains(img)) return;
+            open(img.getAttribute("src"), img.getAttribute("alt"));
+        });
+
+        overlay.addEventListener("click", (event) => {
+            if (event.target === overlay) {
+                close();
+            }
+        });
+
+        closeBtn.addEventListener("click", close);
+        window.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                close();
+            }
+        });
+    })();
+</script>
 </body></html>

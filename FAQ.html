@@ -85,16 +85,26 @@
 <a class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium leading-normal hover:text-primary transition-colors" href="gallery.html">Gallery</a>
 <a class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium leading-normal hover:text-primary transition-colors" href="services.html">Services</a>
 <a class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium leading-normal hover:text-primary transition-colors" href="aboutus.html">About Us</a>
-<a class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium leading-normal hover:text-primary transition-colors" href="mailto:ladooandlights@gmail.com">Contact</a>
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium leading-normal hover:text-primary transition-colors" href="FAQ.html">Contact</a>
 </nav>
 <a href="mailto:ladooandlights@gmail.com" class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary hover:bg-primary-dark transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em]">
 <span class="truncate">Inquire Now</span>
 </a>
 </div>
 <div class="lg:hidden flex items-center">
-<span class="material-symbols-outlined text-[#1b0d0d] dark:text-white cursor-pointer">menu</span>
+<button id="mobile-menu-toggle" class="p-2 text-[#1b0d0d] dark:text-white" aria-label="Toggle navigation" aria-expanded="false">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
 </div>
 </header>
+<div id="mobile-menu" class="lg:hidden hidden flex flex-col gap-3 px-6 py-4 border-b border-[#f3e7e7] dark:border-[#3d2222] bg-background-light dark:bg-background-dark">
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-base font-medium leading-normal hover:text-primary transition-colors" href="index.html">Home</a>
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-base font-medium leading-normal hover:text-primary transition-colors" href="gallery.html">Gallery</a>
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-base font-medium leading-normal hover:text-primary transition-colors" href="services.html">Services</a>
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-base font-medium leading-normal hover:text-primary transition-colors" href="aboutus.html">About Us</a>
+<a class="text-[#1b0d0d] dark:text-[#e0dada] text-base font-medium leading-normal hover:text-primary transition-colors" href="FAQ.html">Contact</a>
+<a href="mailto:ladooandlights@gmail.com" class="mt-1 inline-flex items-center justify-center rounded-lg h-11 px-5 bg-primary hover:bg-primary-dark transition-colors text-white text-sm font-bold">Inquire Now</a>
+</div>
 <main class="flex flex-col min-h-screen">
 <section class="relative flex flex-col items-center justify-center w-full min-h-[350px] lg:min-h-[400px] px-4 py-12 lg:px-20">
 <div class="absolute inset-0 w-full h-full z-0">
@@ -308,5 +318,39 @@
 </div>
 </div>
 </footer>
+<script>
+    (() => {
+        const toggle = document.getElementById("mobile-menu-toggle");
+        const menu = document.getElementById("mobile-menu");
+        if (!toggle || !menu) return;
 
+        const body = document.body;
+        const close = () => {
+            menu.classList.add("hidden");
+            toggle.setAttribute("aria-expanded", "false");
+            body.classList.remove("overflow-hidden");
+        };
+
+        toggle.addEventListener("click", () => {
+            const isOpen = !menu.classList.contains("hidden");
+            if (isOpen) {
+                close();
+            } else {
+                menu.classList.remove("hidden");
+                toggle.setAttribute("aria-expanded", "true");
+                body.classList.add("overflow-hidden");
+            }
+        });
+
+        menu.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", close);
+        });
+
+        window.addEventListener("resize", () => {
+            if (window.innerWidth >= 1024) {
+                close();
+            }
+        });
+    })();
+</script>
 </body></html>
