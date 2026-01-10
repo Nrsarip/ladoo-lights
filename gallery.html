@@ -3059,6 +3059,7 @@
   </div>
 </div>
 <!-- AUTOGALLERY:END -->
+</div>
 <div class="mt-12 flex justify-center">
 <button class="flex items-center gap-2 rounded-lg border border-[#e5e5e5] dark:border-[#3d2222] bg-white dark:bg-card-dark px-6 py-3 text-sm font-bold text-[#1b0d0d] dark:text-white shadow-sm hover:bg-gray-50 dark:hover:bg-[#331b1b] transition-colors">
 <span>Load More Projects</span>
@@ -3067,11 +3068,11 @@
 </div>
 </div>
 </section>
-<div id="lightbox-overlay" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-sm px-4">
+<div id="lightbox-overlay" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/85 backdrop-blur-sm">
 <button id="lightbox-close" class="absolute top-6 right-6 text-white bg-black/60 hover:bg-black/80 rounded-full p-2 flex items-center justify-center transition-colors" aria-label="Close lightbox">
 <span class="material-symbols-outlined text-2xl">close</span>
 </button>
-<img id="lightbox-image" class="max-h-[85vh] max-w-[90vw] rounded-lg shadow-2xl object-contain" src="" alt="Expanded gallery image"/>
+<img id="lightbox-image" class="max-h-[100vh] max-w-[100vw] rounded-lg shadow-2xl object-contain" src="" alt="Expanded gallery image"/>
 </div>
 <!-- CTA Section -->
 <section class="bg-[#fcf8f8] dark:bg-[#1a0a0a] py-20 px-4 lg:px-20 border-t border-[#f3e7e7] dark:border-[#3d2222]">
@@ -3193,8 +3194,10 @@
 
         grid.addEventListener("click", (event) => {
             const target = event.target;
-            const img = target instanceof HTMLElement ? target.closest("img") : null;
-            if (!img || !grid.contains(img)) return;
+            const card = target instanceof HTMLElement ? target.closest(".break-inside-avoid") : null;
+            if (!card || !grid.contains(card)) return;
+            const img = card.querySelector("img");
+            if (!img) return;
             open(img.getAttribute("src"), img.getAttribute("alt"));
         });
 
