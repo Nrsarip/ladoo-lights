@@ -79,6 +79,46 @@
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-[#1b0d0d] dark:text-[#fcf8f8] overflow-x-hidden transition-colors duration-300">
+    <!-- Login Overlay -->
+    <div id="loginOverlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-background-light dark:bg-background-dark">
+        <div class="bg-card-light dark:bg-card-dark rounded-2xl shadow-2xl p-8 w-full max-w-md border border-[#f3e7e7] dark:border-[#3d2222]">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center gap-3 mb-4">
+                    <span class="material-symbols-outlined text-primary text-4xl">local_florist</span>
+                </div>
+                <h2 class="text-2xl font-bold text-[#1b0d0d] dark:text-white mb-2">Admin Access</h2>
+                <p class="text-gray-600 dark:text-gray-400">Enter password to access gallery management</p>
+            </div>
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Password
+                    </label>
+                    <input 
+                        type="password" 
+                        id="passwordInput" 
+                        autocomplete="current-password"
+                        class="w-full px-4 py-3 border border-[#e5e5e5] dark:border-[#3d2222] rounded-lg bg-white dark:bg-[#2a1515] text-[#1b0d0d] dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
+                        placeholder="Enter admin password"
+                        required
+                    />
+                </div>
+                <div id="loginError" class="hidden text-red-600 dark:text-red-400 text-sm"></div>
+                <button 
+                    type="submit"
+                    class="w-full px-6 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-lg transition-colors flex items-center justify-center gap-2"
+                >
+                    <span class="material-symbols-outlined">lock</span>
+                    <span>Login</span>
+                </button>
+            </form>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-6 text-center">
+                Default password: <code class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">admin123</code>
+            </p>
+        </div>
+    </div>
+
+    <div id="adminContent" class="hidden">
     <header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f3e7e7] dark:border-b-[#3d2222] bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm px-6 py-4 lg:px-20">
         <div class="flex items-center gap-3">
             <div class="flex items-center justify-center text-primary">
@@ -90,6 +130,10 @@
             <nav class="flex items-center gap-9">
                 <a class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium leading-normal hover:text-primary transition-colors" href="index.html">Home</a>
                 <a class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium leading-normal hover:text-primary transition-colors" href="gallery.html">Gallery</a>
+                <button onclick="logout()" class="text-red-600 dark:text-red-400 text-sm font-medium hover:text-red-700 transition-colors flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm">logout</span>
+                    <span>Logout</span>
+                </button>
             </nav>
         </div>
     </header>
@@ -265,9 +309,76 @@
             </div>
         </div>
     </main>
+    </div>
 
     <script>
+        // Password Protection
+        // CHANGE THIS PASSWORD HASH - Generate a new one at: https://emn178.github.io/online-tools/sha256.html
+        // Default password is "admin123" - CHANGE IT!
+        const PASSWORD_HASH = '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9'; // admin123
+        
+        // Check authentication on page load
+        function checkAuth() {
+            const isAuthenticated = sessionStorage.getItem('admin_authenticated') === 'true';
+            if (isAuthenticated) {
+                showAdmin();
+            } else {
+                showLogin();
+            }
+        }
+
+        function showLogin() {
+            document.getElementById('loginOverlay').classList.remove('hidden');
+            document.getElementById('adminContent').classList.add('hidden');
+        }
+
+        function showAdmin() {
+            document.getElementById('loginOverlay').classList.add('hidden');
+            document.getElementById('adminContent').classList.remove('hidden');
+        }
+
+        function logout() {
+            sessionStorage.removeItem('admin_authenticated');
+            showLogin();
+            document.getElementById('passwordInput').value = '';
+        }
+
+        // Hash password using SHA-256
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const passwordInput = document.getElementById('passwordInput');
+            const errorDiv = document.getElementById('loginError');
+            const password = passwordInput.value;
+            
+            errorDiv.classList.add('hidden');
+            
+            const hashedPassword = await hashPassword(password);
+            
+            if (hashedPassword === PASSWORD_HASH) {
+                sessionStorage.setItem('admin_authenticated', 'true');
+                showAdmin();
+            } else {
+                errorDiv.textContent = 'Incorrect password. Please try again.';
+                errorDiv.classList.remove('hidden');
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        });
+
+        // Initialize
+        checkAuth();
         // Configuration
+        // Note: These credentials are still visible in the source code
+        // For better security, consider using environment variables or a backend service
         const GITHUB_TOKEN = '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';
         const GITHUB_REPO = 'nrsarip/ladoo-lights';
         let selectedFiles = [];
