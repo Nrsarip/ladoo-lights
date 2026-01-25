@@ -175,6 +175,16 @@
             <div id="upload-tab" class="tab-content">
                 <!-- Configuration Section -->
                 <div class="bg-card-light dark:bg-card-dark rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 border border-[#f3e7e7] dark:border-[#3d2222]">
+                    <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3 mb-4">
+                        <div class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-yellow-600 dark:text-yellow-400 text-lg">security</span>
+                            <div class="flex-1">
+                                <p class="text-xs sm:text-sm text-yellow-800 dark:text-yellow-300 font-medium">
+                                    🔒 Security: Your token is stored only in your browser (localStorage). It's never in the code and won't be committed to GitHub.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                     <h2 class="text-lg sm:text-xl font-bold text-[#1b0d0d] dark:text-white mb-3 sm:mb-4">Configuration</h2>
                     <div class="space-y-4">
                         <div>
@@ -184,9 +194,13 @@
                             <input 
                                 type="password" 
                                 id="githubToken" 
-                                value="ghp_xxxxxxxxxxxx"
+                                placeholder="ghp_xxxxxxxxxxxx"
                                 class="w-full px-4 py-2.5 text-base border border-[#e5e5e5] dark:border-[#3d2222] rounded-lg bg-white dark:bg-[#2a1515] text-[#1b0d0d] dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
                             />
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                Enter your token here. It will be saved in your browser for future use. 
+                                <a href="https://github.com/settings/tokens" target="_blank" class="text-primary hover:underline">Generate token →</a>
+                            </p>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -196,6 +210,7 @@
                                 type="text" 
                                 id="githubRepo" 
                                 value="nrsarip/ladoo-lights"
+                                placeholder="username/repository-name"
                                 class="w-full px-4 py-2.5 text-base border border-[#e5e5e5] dark:border-[#3d2222] rounded-lg bg-white dark:bg-[#2a1515] text-[#1b0d0d] dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
                             />
                         </div>
@@ -370,6 +385,9 @@
         function showAdmin() {
             document.getElementById('loginOverlay').classList.add('hidden');
             document.getElementById('adminContent').classList.remove('hidden');
+            // Load saved credentials after showing admin interface
+            loadSavedCredentials();
+            setupCredentialSaving();
         }
 
         function logout() {
@@ -412,9 +430,8 @@
         // Initialize
         checkAuth();
         // Configuration
-        // Note: These credentials are still visible in the source code
-        // For better security, consider using environment variables or a backend service
-        const GITHUB_TOKEN = 'ghp_xxxxxxxxxxxx';
+        // SECURITY: Tokens are stored in localStorage only (client-side)
+        // Never hardcode tokens in source code - GitHub will detect and revoke them!
         const GITHUB_REPO = 'nrsarip/ladoo-lights';
         let selectedFiles = [];
         let processedImages = [];
@@ -509,9 +526,65 @@
             }
         }
         
+        // Load saved token from localStorage (secure - only on user's device)
+        function loadSavedCredentials() {
+            // Wait a bit for DOM to be ready
+            setTimeout(() => {
+                const tokenInput = document.getElementById('githubToken');
+                const repoInput = document.getElementById('githubRepo');
+                
+                if (tokenInput && repoInput) {
+                    const savedToken = localStorage.getItem('githubToken');
+                    const savedRepo = localStorage.getItem('githubRepo');
+                    
+                    // Only fill if empty (don't overwrite user input)
+                    if (savedToken && !tokenInput.value) {
+                        tokenInput.value = savedToken;
+                    }
+                    if (savedRepo && !repoInput.value) {
+                        repoInput.value = savedRepo;
+                    }
+                }
+            }, 100);
+        }
+        
+        // Save credentials to localStorage when changed
+        function setupCredentialSaving() {
+            setTimeout(() => {
+                const tokenInput = document.getElementById('githubToken');
+                const repoInput = document.getElementById('githubRepo');
+                
+                if (tokenInput && !tokenInput.hasAttribute('data-listener-added')) {
+                    tokenInput.setAttribute('data-listener-added', 'true');
+                    tokenInput.addEventListener('input', (e) => {
+                        const value = e.target.value.trim();
+                        if (value) {
+                            localStorage.setItem('githubToken', value);
+                        } else {
+                            localStorage.removeItem('githubToken');
+                        }
+                    });
+                }
+                
+                if (repoInput && !repoInput.hasAttribute('data-listener-added')) {
+                    repoInput.setAttribute('data-listener-added', 'true');
+                    repoInput.addEventListener('input', (e) => {
+                        const value = e.target.value.trim();
+                        if (value) {
+                            localStorage.setItem('githubRepo', value);
+                        } else {
+                            localStorage.removeItem('githubRepo');
+                        }
+                    });
+                }
+            }, 100);
+        }
+        
         // Initialize when DOM is ready
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initCategorySystem);
+            document.addEventListener('DOMContentLoaded', () => {
+                initCategorySystem();
+            });
         } else {
             initCategorySystem();
         }

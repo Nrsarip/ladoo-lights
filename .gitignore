@@ -1,0 +1,25 @@
+# GitHub Tokens and Secrets
+# NEVER commit files containing tokens or secrets
+admin.html.local
+config.js
+*.token
+*.secret
+TOKEN_REFERENCE.txt
+
+# Environment files
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
