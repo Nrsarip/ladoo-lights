@@ -225,6 +225,42 @@
                                 class="w-full px-4 py-2.5 text-base border border-[#e5e5e5] dark:border-[#3d2222] rounded-lg bg-white dark:bg-[#2a1515] text-[#1b0d0d] dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
                             />
                         </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 sm:p-4">
+                            <h3 class="text-sm font-semibold text-blue-900 dark:text-blue-100 mb-3">Image Compression Settings</h3>
+                            <p class="text-xs text-blue-700 dark:text-blue-300 mb-3">💡 Set these before selecting images. Changes require re-selecting files.</p>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Max Width (px) - Leave empty for no resize
+                                    </label>
+                                    <input 
+                                        type="number" 
+                                        id="maxWidth" 
+                                        placeholder="e.g., 1920"
+                                        class="w-full px-4 py-2.5 text-base border border-[#e5e5e5] dark:border-[#3d2222] rounded-lg bg-white dark:bg-[#2a1515] text-[#1b0d0d] dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
+                                    />
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Recommended: 1920px for web display. Images larger than this will be resized proportionally.</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        JPEG Quality: <span id="qualityValue">85</span>%
+                                    </label>
+                                    <input 
+                                        type="range" 
+                                        id="jpegQuality" 
+                                        min="50" 
+                                        max="100" 
+                                        value="85"
+                                        class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                                    />
+                                    <div class="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                        <span>Smaller (50%)</span>
+                                        <span>Larger (100%)</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Lower quality = smaller file size. 85% is recommended for photos. 70-80% for smaller files, 90-100% for best quality.</p>
+                                </div>
+                            </div>
+                        </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                 Photo Categories (Select multiple)
@@ -616,6 +652,11 @@
         document.getElementById('refreshGallery').addEventListener('click', loadGallery);
         document.getElementById('testConnection').addEventListener('click', testConnection);
         document.getElementById('setAllToAllProjects').addEventListener('click', setAllPhotosToAllProjects);
+        
+        // Update quality value display when slider changes
+        document.getElementById('jpegQuality').addEventListener('input', (e) => {
+            document.getElementById('qualityValue').textContent = e.target.value;
+        });
 
         // Upload functionality
         const uploadArea = document.getElementById('uploadArea');
@@ -666,15 +707,36 @@
                 reader.onload = (e) => {
                     const img = new Image();
                     img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        canvas.width = img.width;
-                        canvas.height = img.height;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0);
+                        // Get compression settings
+                        const maxWidthInput = document.getElementById('maxWidth');
+                        const maxWidth = maxWidthInput.value ? parseInt(maxWidthInput.value) : null;
+                        const quality = parseInt(document.getElementById('jpegQuality').value) / 100;
                         
+                        // Calculate new dimensions if resizing needed
+                        let width = img.width;
+                        let height = img.height;
+                        
+                        if (maxWidth && width > maxWidth) {
+                            height = (height * maxWidth) / width;
+                            width = maxWidth;
+                        }
+                        
+                        const canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        
+                        // Use high-quality image scaling
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.imageSmoothingQuality = 'high';
+                        
+                        // Draw and resize image
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        // Add watermark
                         const watermarkText = document.getElementById('watermarkText').value || 'Ladoo & Lights';
                         ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-                        ctx.font = `bold ${Math.max(24, img.width / 20)}px Manrope, sans-serif`;
+                        ctx.font = `bold ${Math.max(24, width / 20)}px Manrope, sans-serif`;
                         ctx.textAlign = 'right';
                         ctx.textBaseline = 'bottom';
                         ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
@@ -683,15 +745,24 @@
                         ctx.shadowOffsetY = 2;
                         ctx.fillText(watermarkText, canvas.width - 20, canvas.height - 20);
 
+                        // Convert to blob with specified quality
                         canvas.toBlob((blob) => {
                             const fileName = `gallery_${Date.now()}_${index}.jpeg`;
+                            const originalSize = file.size;
+                            const compressedSize = blob.size;
+                            const compressionRatio = ((1 - compressedSize / originalSize) * 100).toFixed(1);
+                            
                             resolve({
                                 original: file,
                                 watermarked: blob,
                                 fileName: fileName,
-                                originalName: file.name
+                                originalName: file.name,
+                                originalSize: originalSize,
+                                compressedSize: compressedSize,
+                                compressionRatio: compressionRatio,
+                                dimensions: { width: width, height: height }
                             });
-                        }, 'image/jpeg', 0.9);
+                        }, 'image/jpeg', quality);
                     };
                     img.src = e.target.result;
                 };
@@ -699,14 +770,37 @@
             });
         }
 
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];
+        }
+
         function displayPreview(processed, index) {
             const div = document.createElement('div');
             div.className = 'preview-image bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden';
+            
+            const sizeInfo = processed.compressedSize ? 
+                `<div class="px-2 pb-2 space-y-1">
+                    <p class="text-xs text-gray-600 dark:text-gray-400 truncate">${processed.originalName}</p>
+                    <div class="flex justify-between text-xs">
+                        <span class="text-gray-500 dark:text-gray-500">Original: ${formatFileSize(processed.originalSize)}</span>
+                        <span class="text-green-600 dark:text-green-400 font-medium">→ ${formatFileSize(processed.compressedSize)}</span>
+                    </div>
+                    <p class="text-xs text-green-600 dark:text-green-400 font-medium">
+                        ${processed.compressionRatio}% smaller
+                    </p>
+                    ${processed.dimensions ? `<p class="text-xs text-gray-500 dark:text-gray-500">${processed.dimensions.width} × ${processed.dimensions.height}px</p>` : ''}
+                </div>` :
+                `<div class="p-2">
+                    <p class="text-xs text-gray-600 dark:text-gray-400 truncate">${processed.originalName}</p>
+                </div>`;
+            
             div.innerHTML = `
                 <img src="${URL.createObjectURL(processed.watermarked)}" alt="Preview" class="w-full h-48 object-cover" />
-                <div class="p-2">
-                    <p class="text-xs text-gray-600 dark:text-gray-400 truncate">${processed.originalName}</p>
-                </div>
+                ${sizeInfo}
             `;
             previewGrid.appendChild(div);
         }
