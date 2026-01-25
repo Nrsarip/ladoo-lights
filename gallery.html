@@ -66,6 +66,10 @@
         body.lightbox-open {
             overflow: hidden;
         }
+        /* Gallery filter transitions */
+        #autoGalleryGrid .break-inside-avoid {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-[#1b0d0d] dark:text-[#fcf8f8] overflow-x-hidden transition-colors duration-300">
@@ -129,22 +133,22 @@
 <!-- Filter / Chips Section -->
 <section class="sticky top-[72px] z-40 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-[#f3e7e7] dark:border-[#3d2222] py-4 px-4 lg:px-20 overflow-x-auto">
 <div class="flex justify-start lg:justify-center gap-3 min-w-max mx-auto max-w-[1200px]">
-<button class="group flex h-9 items-center justify-center gap-x-2 rounded-full bg-primary pl-5 pr-5 shadow-sm transition-all hover:bg-primary-dark">
+<button type="button" data-filter="all" class="filter-btn group flex h-9 items-center justify-center gap-x-2 rounded-full bg-primary pl-5 pr-5 shadow-sm transition-all hover:bg-primary-dark">
 <span class="text-white text-sm font-bold">All Projects</span>
 </button>
-<button class="group flex h-9 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-[#e5e5e5] dark:border-[#3d2222] pl-5 pr-5 hover:border-primary hover:text-primary transition-all">
+<button type="button" data-filter="weddings" class="filter-btn group flex h-9 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-[#e5e5e5] dark:border-[#3d2222] pl-5 pr-5 hover:border-primary hover:text-primary transition-all">
 <span class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium group-hover:text-primary">Weddings</span>
 </button>
-<button class="group flex h-9 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-[#e5e5e5] dark:border-[#3d2222] pl-5 pr-5 hover:border-primary hover:text-primary transition-all">
+<button type="button" data-filter="floral-mandaps" class="filter-btn group flex h-9 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-[#e5e5e5] dark:border-[#3d2222] pl-5 pr-5 hover:border-primary hover:text-primary transition-all">
 <span class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium group-hover:text-primary">Floral Mandaps</span>
 </button>
-<button class="group flex h-9 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-[#e5e5e5] dark:border-[#3d2222] pl-5 pr-5 hover:border-primary hover:text-primary transition-all">
+<button type="button" data-filter="haldi-ceremonies" class="filter-btn group flex h-9 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-[#e5e5e5] dark:border-[#3d2222] pl-5 pr-5 hover:border-primary hover:text-primary transition-all">
 <span class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium group-hover:text-primary">Haldi Ceremonies</span>
 </button>
-<button class="group flex h-9 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-[#e5e5e5] dark:border-[#3d2222] pl-5 pr-5 hover:border-primary hover:text-primary transition-all">
+<button type="button" data-filter="receptions" class="filter-btn group flex h-9 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-[#e5e5e5] dark:border-[#3d2222] pl-5 pr-5 hover:border-primary hover:text-primary transition-all">
 <span class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium group-hover:text-primary">Receptions</span>
 </button>
-<button class="group flex h-9 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-[#e5e5e5] dark:border-[#3d2222] pl-5 pr-5 hover:border-primary hover:text-primary transition-all">
+<button type="button" data-filter="sangeet" class="filter-btn group flex h-9 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-[#e5e5e5] dark:border-[#3d2222] pl-5 pr-5 hover:border-primary hover:text-primary transition-all">
 <span class="text-[#1b0d0d] dark:text-[#e0dada] text-sm font-medium group-hover:text-primary">Sangeet</span>
 </button>
 </div>
@@ -3227,6 +3231,105 @@
                 close();
             }
         });
+    })();
+
+    // Gallery Filtering Functionality
+    (() => {
+        // Wait for DOM to be fully loaded
+        function initFiltering() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryGrid = document.getElementById('autoGalleryGrid');
+            
+            if (!galleryGrid) {
+                console.error('Gallery grid not found');
+                return;
+            }
+            
+            const galleryItems = galleryGrid.querySelectorAll('.break-inside-avoid');
+            
+            if (filterButtons.length === 0) {
+                console.error('Filter buttons not found');
+                return;
+            }
+            
+            if (galleryItems.length === 0) {
+                console.warn('No gallery items found');
+                return;
+            }
+            
+            // Add data-category="all" to items without a category (for backward compatibility)
+            galleryItems.forEach(item => {
+                if (!item.hasAttribute('data-category')) {
+                    item.setAttribute('data-category', 'all');
+                }
+            });
+
+            function filterGallery(category) {
+                galleryItems.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    
+                    if (category === 'all' || itemCategory === category) {
+                        item.style.display = '';
+                        // Trigger reflow for smooth animation
+                        item.offsetHeight;
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1)';
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 200);
+                    }
+                });
+
+                // Update button styles
+                filterButtons.forEach(btn => {
+                    const btnCategory = btn.getAttribute('data-filter');
+                    const span = btn.querySelector('span');
+                    
+                    if (!span) return;
+                    
+                    if (btnCategory === category) {
+                        btn.classList.remove('bg-white', 'dark:bg-card-dark', 'border', 'border-[#e5e5e5]', 'dark:border-[#3d2222]');
+                        btn.classList.add('bg-primary', 'shadow-sm');
+                        span.classList.remove('text-[#1b0d0d]', 'dark:text-[#e0dada]', 'font-medium');
+                        span.classList.add('text-white', 'font-bold');
+                    } else {
+                        btn.classList.remove('bg-primary', 'shadow-sm');
+                        btn.classList.add('bg-white', 'dark:bg-card-dark', 'border', 'border-[#e5e5e5]', 'dark:border-[#3d2222]');
+                        span.classList.remove('text-white', 'font-bold');
+                        span.classList.add('text-[#1b0d0d]', 'dark:text-[#e0dada]', 'font-medium');
+                    }
+                });
+            }
+
+            // Add click handlers to filter buttons
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const category = btn.getAttribute('data-filter');
+                    console.log('Filter button clicked:', category); // Debug log
+                    if (category) {
+                        filterGallery(category);
+                    }
+                });
+            });
+            
+            console.log('Filter functionality initialized:', filterButtons.length, 'buttons,', galleryItems.length, 'items'); // Debug log
+
+            // Initialize with 'all' filter
+            filterGallery('all');
+        }
+        
+        // Run when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initFiltering);
+        } else {
+            // DOM is already loaded
+            initFiltering();
+        }
     })();
 </script>
 </body></html>
