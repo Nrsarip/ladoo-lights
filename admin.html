@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" name="viewport"/>
-    <title>Ladoo &amp; Lights - Gallery Management</title>
+    <title>Ladoo and Lights - Gallery Management</title>
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
@@ -129,7 +129,7 @@
             <div class="flex items-center justify-center text-primary">
                 <span class="material-symbols-outlined text-2xl sm:text-3xl">local_florist</span>
             </div>
-            <a href="index.html" class="text-[#1b0d0d] dark:text-white text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em]">Ladoo &amp; Lights</a>
+            <a href="index.html" class="text-[#1b0d0d] dark:text-white text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em]">Ladoo and Lights</a>
         </div>
         <div class="hidden lg:flex flex-1 justify-end gap-8 items-center">
             <nav class="flex items-center gap-9">
@@ -221,7 +221,7 @@
                             <input 
                                 type="text" 
                                 id="watermarkText" 
-                                value="Ladoo & Lights"
+                                value="Ladoo and Lights"
                                 class="w-full px-4 py-2.5 text-base border border-[#e5e5e5] dark:border-[#3d2222] rounded-lg bg-white dark:bg-[#2a1515] text-[#1b0d0d] dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
                             />
                         </div>
@@ -472,7 +472,56 @@
         let selectedFiles = [];
         let processedImages = [];
         let galleryPhotos = [];
-        
+
+        function parseGalleryHtmlDocument(html) {
+            return new DOMParser().parseFromString(html, 'text/html');
+        }
+
+        function serializeGalleryHtmlDocument(doc, originalHtml) {
+            const dt = originalHtml.match(/^<!DOCTYPE[^>]*>\s*/i);
+            return (dt ? dt[0] : '<!DOCTYPE html>\n\n') + doc.documentElement.outerHTML;
+        }
+
+        function findGalleryCardByFilename(doc, filename) {
+            const grid = doc.getElementById('autoGalleryGrid');
+            if (!grid) return null;
+            for (const img of grid.querySelectorAll('img[src]')) {
+                const src = (img.getAttribute('src') || '').trim();
+                if (src === `assets/gallery/${filename}` || src.endsWith(`/${filename}`)) {
+                    return img.closest('.break-inside-avoid') || img.parentElement;
+                }
+            }
+            return null;
+        }
+
+        function extractGalleryImagesFromContent(content) {
+            const doc = parseGalleryHtmlDocument(content);
+            const grid = doc.getElementById('autoGalleryGrid');
+            if (!grid) {
+                throw new Error('Could not find #autoGalleryGrid in gallery.html');
+            }
+            const images = [];
+            const seen = new Set();
+            grid.querySelectorAll(':scope > div').forEach((card) => {
+                const img = card.querySelector('img[src]');
+                if (!img) return;
+                const src = img.getAttribute('src') || '';
+                const m = src.match(/(?:assets\/gallery|images_watermarked)\/([^/?#\s"']+)/);
+                if (!m) return;
+                const fn = m[1];
+                if (seen.has(fn)) return;
+                seen.add(fn);
+                let category = (card.getAttribute('data-category') || 'all').trim();
+                const categoryList = category.split(/\s+/).filter((c) => c);
+                if (!categoryList.includes('all')) {
+                    categoryList.unshift('all');
+                    category = categoryList.join(' ');
+                }
+                images.push({ filename: fn, category });
+            });
+            return images;
+        }
+
         // Load categories from localStorage or use defaults
         function getCategories() {
             const saved = localStorage.getItem('galleryCategories');
@@ -734,7 +783,7 @@
                         ctx.drawImage(img, 0, 0, width, height);
                         
                         // Add watermark
-                        const watermarkText = document.getElementById('watermarkText').value || 'Ladoo & Lights';
+                        const watermarkText = document.getElementById('watermarkText').value || 'Ladoo and Lights';
                         ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
                         ctx.font = `bold ${Math.max(24, width / 20)}px Manrope, sans-serif`;
                         ctx.textAlign = 'right';
@@ -983,7 +1032,7 @@
             
             // Always show "Latest Work" in the gallery
             const galleryItem = `\n<div class="break-inside-avoid group relative block overflow-hidden rounded-xl bg-gray-100 cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300" data-category="${categoryString}">
-  <img alt="Ladoo & Lights event decor" loading="lazy" decoding="async" data-fallback="images_watermarked/${fileName}" class="w-full transform object-cover transition-transform duration-500 group-hover:scale-105" src="assets/gallery/${fileName}"/>
+  <img alt="Ladoo and Lights event decor" loading="lazy" decoding="async" data-fallback="images_watermarked/${fileName}" class="w-full transform object-cover transition-transform duration-500 group-hover:scale-105" src="assets/gallery/${fileName}"/>
   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
     <p class="text-accent-gold text-xs font-bold uppercase tracking-wider mb-1">Kansas</p>
     <h3 class="text-white text-xl font-bold leading-tight mb-2">Latest Work</h3>
@@ -1164,34 +1213,7 @@
                     throw new Error('Failed to decode gallery.html content');
                 }
                 
-                // Extract image filenames from gallery.html
-                // Try both src patterns: assets/gallery/ and images_watermarked/
-                const imageRegex = /src=["'](?:assets\/gallery|images_watermarked)\/([^"']+)["']/g;
-                const images = [];
-                const seen = new Set();
-                let match;
-                
-                while ((match = imageRegex.exec(content)) !== null) {
-                    const filename = match[1];
-                    if (seen.has(filename)) continue;
-                    seen.add(filename);
-                    
-                    // Find the category for this image
-                    // Look backwards from the match position to find the nearest data-category
-                    const beforeMatch = content.substring(0, match.index);
-                    const categoryMatch = beforeMatch.match(/data-category=["']([^"']+)["']/);
-                    // Categories can be space-separated, so we keep the full string
-                    let category = categoryMatch ? categoryMatch[1] : 'all';
-                    
-                    // Normalize: if category doesn't include "all", add it
-                    const categoryList = category.split(' ').filter(c => c);
-                    if (!categoryList.includes('all')) {
-                        categoryList.unshift('all');
-                        category = categoryList.join(' ');
-                    }
-                    
-                    images.push({ filename, category });
-                }
+                const images = extractGalleryImagesFromContent(content);
 
                 galleryPhotos = images;
                 displayGallery(images);
@@ -1313,37 +1335,32 @@
             }
 
             const fileData = await getResponse.json();
-            let content = atob(fileData.content.replace(/\s/g, ''));
+            const content = atob(fileData.content.replace(/\s/g, ''));
 
-            // Find the image entry
-            const imageRegex = new RegExp(`(<div[^>]*data-category="[^"]*"[^>]*>[\\s\\S]*?src="(?:assets/gallery|images_watermarked)/${filename.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[\\s\\S]*?</div>)`, 'g');
-            const match = imageRegex.exec(content);
-            
-            if (!match) {
+            const doc = parseGalleryHtmlDocument(content);
+            const card = findGalleryCardByFilename(doc, filename);
+
+            if (!card) {
                 throw new Error('Photo not found in gallery.html');
             }
-            
-            const fullMatch = match[0];
-            const categoryMatch = fullMatch.match(/data-category="([^"]*)"/);
-            let currentCategories = categoryMatch ? categoryMatch[1].split(' ').filter(c => c) : ['all'];
-            
+
+            let currentCategories = (card.getAttribute('data-category') || 'all').split(/\s+/).filter((c) => c);
+
             if (action === 'add') {
                 if (!currentCategories.includes(category)) {
                     currentCategories.push(category);
                 }
             } else if (action === 'remove') {
-                currentCategories = currentCategories.filter(c => c !== category);
-                // Always keep "all"
+                currentCategories = currentCategories.filter((c) => c !== category);
                 if (!currentCategories.includes('all')) {
                     currentCategories.unshift('all');
                 }
             }
-            
-            const newCategoryString = currentCategories.join(' ');
-            const updatedMatch = fullMatch.replace(/data-category="[^"]*"/, `data-category="${newCategoryString}"`);
-            content = content.replace(fullMatch, updatedMatch);
-            
-            const base64Content = btoa(unescape(encodeURIComponent(content)));
+
+            card.setAttribute('data-category', currentCategories.join(' '));
+
+            const newContent = serializeGalleryHtmlDocument(doc, content);
+            const base64Content = btoa(unescape(encodeURIComponent(newContent)));
 
             const updateResponse = await fetch(
                 `https://api.github.com/repos/${owner}/${repoName}/contents/gallery.html`,
@@ -1521,13 +1538,19 @@
             }
 
             const fileData = await getResponse.json();
-            let content = atob(fileData.content.replace(/\s/g, ''));
+            const content = atob(fileData.content.replace(/\s/g, ''));
 
-            // Remove the gallery item containing this filename
-            const regex = new RegExp(`<div[^>]*data-category="[^"]*"[^>]*>[\\s\\S]*?src="assets/gallery/${filename.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[\\s\\S]*?</div>`, 'g');
-            content = content.replace(regex, '');
+            const doc = parseGalleryHtmlDocument(content);
+            const card = findGalleryCardByFilename(doc, filename);
 
-            const base64Content = btoa(unescape(encodeURIComponent(content)));
+            if (!card) {
+                throw new Error('Photo not found in gallery.html');
+            }
+
+            card.remove();
+
+            const newContent = serializeGalleryHtmlDocument(doc, content);
+            const base64Content = btoa(unescape(encodeURIComponent(newContent)));
 
             const updateResponse = await fetch(
                 `https://api.github.com/repos/${owner}/${repoName}/contents/gallery.html`,

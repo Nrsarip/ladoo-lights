@@ -1,6 +1,6 @@
 # Photo Upload Setup Guide
 
-This guide explains how to set up and use the photo upload feature for the Ladoo & Lights website.
+This guide explains how to set up and use the photo upload feature for the Ladoo and Lights website.
 
 ## Overview
 
@@ -27,7 +27,7 @@ The upload page (`upload.html`) allows authorized users to:
 2. Enter your GitHub Personal Access Token
 3. Enter your repository name in the format: `username/repository-name`
    - Example: `nityantasaripalli/ladoo-lights`
-4. (Optional) Customize the watermark text (default: "Ladoo & Lights")
+4. (Optional) Customize the watermark text (default: "Ladoo and Lights")
 
 The configuration will be saved in your browser's localStorage for future use.
 
