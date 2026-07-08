@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Divya & Mahendra — Wedding Ceremony Guide</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#ec1313",
+          "primary-dark": "#c40f0f",
+          "accent-gold": "#D4AF37",
+        },
+        fontFamily: {
+          "display": ["Manrope", "sans-serif"],
+          "serif": ["Cormorant Garamond", "Georgia", "serif"]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { font-family: 'Manrope', sans-serif; }
+
+  .gold-bar {
+    height: 3px;
+    background: linear-gradient(90deg, #D4AF37, #f0d060, #D4AF37);
+  }
+
+  .names {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up  { animation: fadeUp 0.7s ease both; }
+  .fade-up2 { animation: fadeUp 0.7s ease 0.12s both; }
+  .fade-up3 { animation: fadeUp 0.7s ease 0.24s both; }
+</style>
+</head>
+<body class="bg-[#faf8f4] text-[#1b0d0d] min-h-screen flex flex-col">
+
+<!-- Gold accent bar -->
+<div class="gold-bar"></div>
+
+<!-- Header -->
+<header class="text-center pt-10 pb-6 px-4">
+  <div class="flex items-center justify-center gap-2 mb-4 fade-up">
+    <svg class="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+    <span class="text-primary font-bold text-xs uppercase tracking-widest">Ladoo and Lights</span>
+  </div>
+
+  <h1 class="names text-5xl sm:text-6xl font-semibold text-[#1b0d0d] leading-tight fade-up2">
+    Divya &amp; Mahendra
+  </h1>
+
+  <div class="flex items-center justify-center gap-3 mt-3 fade-up3">
+    <div class="h-px w-10 bg-[#D4AF37]"></div>
+    <p class="text-[#D4AF37] font-bold text-xs uppercase tracking-widest">July 4, 2026</p>
+    <div class="h-px w-10 bg-[#D4AF37]"></div>
+  </div>
+
+  <p class="text-gray-500 text-sm mt-2 fade-up3">A Guide to Our Traditional Telugu Wedding Ceremony</p>
+</header>
+
+<!-- Event detail pills -->
+<div class="flex flex-wrap justify-center gap-3 px-4 mb-8 fade-up3">
+  <span class="inline-flex items-center gap-1.5 bg-white border border-[#e8d5d5] rounded-full px-4 py-1.5 text-xs font-semibold text-[#1b0d0d] shadow-sm">
+    <svg class="w-3.5 h-3.5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+    July 4, 2026
+  </span>
+  <span class="inline-flex items-center gap-1.5 bg-white border border-[#e8d5d5] rounded-full px-4 py-1.5 text-xs font-semibold text-[#1b0d0d] shadow-sm">
+    <svg class="w-3.5 h-3.5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+    Telugu Wedding Ceremony
+  </span>
+  <span class="inline-flex items-center gap-1.5 bg-white border border-[#e8d5d5] rounded-full px-4 py-1.5 text-xs font-semibold text-[#1b0d0d] shadow-sm">
+    <svg class="w-3.5 h-3.5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+    Ceremony Guide
+  </span>
+</div>
+
+<!-- Document viewer -->
+<main class="flex-1 w-full max-w-2xl mx-auto px-4 pb-6">
+  <div class="rounded-2xl overflow-hidden shadow-2xl border border-[#e8d5d5] bg-white">
+    <picture>
+      <source srcset="event-placeholder.avif" type="image/avif"/>
+      <img
+        src="event-placeholder.jpeg"
+        alt="Divya and Mahendra wedding ceremony guide"
+        class="w-full object-contain block"
+        onerror="this.closest('picture').style.display='none'; document.getElementById('placeholder-fallback').style.display='flex';"
+      />
+    </picture>
+    <div id="placeholder-fallback" class="hidden items-center justify-center bg-[#fdf5f5] py-24 px-8 text-center flex-col gap-4">
+      <svg class="w-16 h-16 text-[#e8d5d5]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 18h18M3.75 4.5h16.5A.75.75 0 0121 5.25v13.5a.75.75 0 01-.75.75H3.75A.75.75 0 013 18.75V5.25A.75.75 0 013.75 4.5z"/></svg>
+      <p class="text-gray-400 text-sm font-medium">Ceremony guide will appear here</p>
+    </div>
+  </div>
+
+  <!-- PDF swap note (hidden, for developer reference) -->
+  <!-- To use a PDF instead: replace the <picture> block above with:
+       <embed src="your-file.pdf" type="application/pdf" class="w-full" style="min-height:80vh;" />
+  -->
+</main>
+
+<!-- Ladoo and Lights branded footer -->
+<footer class="mt-12">
+  <div class="gold-bar"></div>
+  <div class="bg-[#1b0d0d] text-white py-14 px-6 text-center">
+    <div class="max-w-md mx-auto flex flex-col items-center gap-5">
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4 text-[#D4AF37]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="text-[#D4AF37] font-bold text-xs uppercase tracking-widest">Designed by Ladoo and Lights</span>
+      </div>
+      <p class="names text-2xl text-white/90 italic">Wishing Divya &amp; Mahendra a lifetime of joy</p>
+      <p class="text-white/60 text-sm leading-relaxed">
+        Loved the decor? We bring South Asian weddings to life — florals, lighting, mandaps, and more across Kansas and beyond.
+      </p>
+      <a
+        href="https://ladooandlights.com"
+        class="inline-flex items-center gap-2 mt-1 bg-primary hover:bg-primary-dark transition-colors text-white font-bold text-sm px-7 py-3 rounded-full shadow-lg"
+      >
+        View Our Work
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+      <p class="text-white/25 text-xs">ladooandlights@gmail.com</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
