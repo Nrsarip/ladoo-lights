@@ -61,6 +61,14 @@
   .fade-up2 { animation: fadeUp 0.6s ease 0.1s both; }
   .fade-up3 { animation: fadeUp 0.6s ease 0.2s both; }
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NCG686845Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NCG686845Z');
+</script>
 </head>
 <body class="text-[#1b0d0d] min-h-screen flex flex-col">
 
@@ -106,6 +114,14 @@
     </div>
   </div>
 
+  <!-- Event page link -->
+  <div class="mt-5 fade-up3">
+    <a href="event.html" class="inline-flex items-center gap-2 border border-[#D4AF37]/40 hover:border-[#D4AF37] text-[#1b0d0d]/70 hover:text-[#1b0d0d] transition-colors text-xs font-semibold px-5 py-2 rounded-full">
+      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+      View Ceremony Guide
+    </a>
+  </div>
+
   <!-- Tip row -->
   <div class="flex flex-wrap justify-center gap-4 mt-6 text-[#1b0d0d]/40 text-xs fade-up3">
     <span class="flex items-center gap-1.5">
@@ -147,5 +163,23 @@
   </div>
 </footer>
 
+<!-- Cookie Consent Banner -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#1b0d0d;color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;box-shadow:0 -2px 16px rgba(0,0,0,0.3);">
+  <p style="margin:0;font-size:13px;line-height:1.5;max-width:700px;opacity:0.85;">
+    This site uses cookies and Google Analytics to understand how visitors use our website. No personal data is sold. By continuing to browse, you agree to our use of analytics cookies. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:#D4AF37;text-decoration:underline;">Learn more</a>.
+  </p>
+  <button onclick="acceptCookies()" style="background:#ec1313;color:#fff;border:none;padding:10px 22px;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Got it</button>
+</div>
+<script>
+(function(){
+  if(!localStorage.getItem('cookie_consent')){
+    document.getElementById('cookie-banner').style.display='flex';
+  }
+})();
+function acceptCookies(){
+  localStorage.setItem('cookie_consent','1');
+  document.getElementById('cookie-banner').style.display='none';
+}
+</script>
 </body>
 </html>
